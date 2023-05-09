@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+    var u = ViewBag.UserId;
+    var p = ViewBag.Payload;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+    <div> 
+    </div>
+    <script>
+        alert("success");
+        localStorage.setItem(@u, @p);
+        alert("another success");
+    </script>
+</body>
+</html>

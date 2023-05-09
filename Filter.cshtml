@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Shopping_Cart_Assignment.Models.Product>
+
+@{
+    ViewBag.Title = "Filter";
+}
+
+<h2>Index</h2>
+
+<link href="~/Content/toastr.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <div class="container">
+        @Html.ActionLink("Categories", "Index", "Customer", new { area = "" }, new { @class = "navbar-brand" })
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+            <li>@Html.ActionLink("All", "Index", "Customer", new { area = "" }, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Footwear", "Filter", "Customer", new { filter = "footwear" }, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Medicines", "Filter", "Customer", new { filter = "medicines" }, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Electronics", "Filter", "Customer", new { filter = "electronics" }, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Devices", "Filter", "Customer", new { filter = "devices" }, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Accessories", "Filter", "Customer", new { filter = "accessories" }, new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Food", "Filter", "Customer", new { filter = "food" }, new { @class = "nav-link" })</li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row d-flex justify-content-center">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-12 d-flex justify-content-center" style="margin: 15px 0px;">
+            <div class="container card flex-row" style="width: 100%; height:350px;">
+                <img src="@item.Image" style="width: 350px" class="card-img-top img-fluid" alt="Card image cap">
+                <div class="card-body">
+                    <h3 class="card-title">@item.Name</h3>
+                    <h4 class="card-text" style="color: red">INR.@item.Price</h4>
+                    <p class="card-text">@item.Description</p>
+                    <div>
+                        <span><h4 class="card-text">Rating: @item.Rating</h4></span>
+                        <span><h4 class="card-text">Quantity: @item.Quantity</h4></span>
+                    </div>
+                    <div>-------------------</div>
+                    @{
+                        TempData["Id"] = item.Id;
+                    }
+                    @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.Id }, new { @class = "btn btn-primary", @id = "add" })
+                </div>
+            </div>
+        </div>
+       
+    }
+</div>
+
+ 

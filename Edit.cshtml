@@ -1,12 +1,12 @@
 ﻿@model Shopping_Cart_Assignment.Models.Product
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
-@using (Html.BeginForm("Create", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -33,7 +33,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -49,7 +49,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="file" required="required" name="file" id="file" />
+            <img class="img-fluid" src="@Url.Content(Session["ImgPath"].ToString())" width="150" hieght="150" />
+            <input type="file" id="file" name="file" value="@Url.Content(Session["ImgPath"].ToString())" />
             @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -61,11 +62,10 @@
             @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model=>model.Category, new List<SelectListItem>
+            @Html.DropDownListFor(model => model.Category, new List<SelectListItem>
                 {
                 new SelectListItem { Text = "Electronics", Value="Electronics" },
                 new SelectListItem { Text = "Devices", Value="Devices" },
@@ -80,7 +80,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input style="margin: 5px 0px;" type="submit" value="Create" class="btn btn-primary" />
+            <input style="margin: 5px 0px;" type="submit" value="Save" class="btn btn-primary" />
         </div>
     </div>
 </div>
